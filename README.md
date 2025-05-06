@@ -22,7 +22,8 @@ that will help you say the important things that so often only someone like you 
 
 A frustration the Good Enough Lab has is with poorly applied computation. Instead of feeling like
 you should learn to code better, let's figure out the smoothest way for the Good Enough Lab to help
-you. 
+you. Why do scientists like you feel like they also have to code? Wouldn't it be better to find Good Enough 
+ways for coders like me to collaborate with scientists like you?
 
 ## Starting suggestion
 
@@ -30,6 +31,11 @@ Issues are a way for us to make notes on a specific work item.
 
 - Garima opens an [issue](https://github.com/softloud/gg/issues) for each coding thing she is slowed down by
 - Charles will comment on the issue with progress or clarifications
+
+## Side benefits
+
+- Finding out a Good Enough way to collaborate across disciplines is often publishable in scientific epistemology
+- The Good Enough Lab is writing applied mathematics papers on scientific systems epistemology and will use these projects as examples, so you become second author on those
 
 
 
