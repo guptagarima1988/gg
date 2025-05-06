@@ -34,8 +34,10 @@ Issues are a way for us to make notes on a specific work item.
 
 ## Side benefits
 
-- Finding out a Good Enough way to collaborate across disciplines is often publishable in scientific epistemology
+- Finding out a Good Enough way to collaborate across disciplines is potentially publishable in scientific epistemology
 - The Good Enough Lab is writing applied mathematics papers on scientific systems epistemology and will use these projects as examples, so you become second author on those
+- The Good Enough Lab will publish in the open in any case
+- Blog provides a place where we can communicate the shitfuckery of systems; the stupid decisions made by leadership that cause real-world harm
 
 
 
