@@ -4,6 +4,10 @@ Hi Garima,
 
 I only know how to do "the code bit". You have really important scientific things to say.  
 
+Consider the Good Enough Data & Systems Lab as your coding accompanist; like a piano accompanist is hired to play at a performance where the soloist chooses the music, the venue, etc. 
+
+How can we help you do good enough science? 
+
 # The code bit
 
 This online space is where I can share the code bits you need with you.
