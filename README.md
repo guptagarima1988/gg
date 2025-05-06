@@ -36,6 +36,10 @@ Issues are a way for us to make notes on a specific work item.
 - Garima opens an [issue](https://github.com/softloud/gg/issues) for each coding thing she is slowed down by
 - Charles will comment on the issue with progress or clarifications
 
+### Garima's ideas
+
+Garima, anything that would make life easier with "the code bit", throw the idea down as an [issue](https://github.com/softloud/gg/issues) for us to solve.
+
 ## Side benefits
 
 - Finding out a Good Enough way to collaborate across disciplines is potentially publishable in scientific epistemology
