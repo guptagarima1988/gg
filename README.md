@@ -1,2 +1,37 @@
-# gg
-garima
+# Charles & Garima
+
+Hi Garima,
+
+I only know how to do "the code bit". You have really important scientific things to say.  
+
+# The code bit
+
+This online space is where I can share the code bits you need with you.
+
+# Why be good at everything? 
+
+I cannot ever catch up to your knowledge about sustainable development. 
+
+I can't think of anything cooler than helping someone (you) who can see the mismatch in priorities
+between government, people, and ecology say what needs saying in the global south.
+
+You decide what needs saying. The Good Enough Data & Systems Lab will help you with the code bits
+that will help you say the important things that so often only someone like you understands.
+
+# Cross-disciplinary collaboration 
+
+A frustration the Good Enough Lab has is with poorly applied computation. Instead of feeling like
+you should learn to code better, let's figure out the smoothest way for the Good Enough Lab to help
+you. 
+
+## Starting suggestion
+
+Issues are a way for us to make notes on a specific work item.
+
+- Garima opens an [issue](https://github.com/softloud/gg/issues) for each coding thing she is slowed down by
+- Charles will comment on the issue with progress or clarifications
+
+
+
+
+
