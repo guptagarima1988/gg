@@ -1,0 +1,37 @@
+# FAIR data entity test
+
+## Purpose of this document
+
+This document tests if you can read data and see a row from that data on your machine.
+
+## Open the data from your local machine
+
+> Make sure the data is copied into local-data/ there is a listing in the .gitignore that ensures anything in this folder ignored when pushing to the github. 
+
+This folder does not push your development data to the internet, and ensures privacy. 
+
+## Install readxl to read excel file into R
+
+```{r}
+# Install the readxl package if not already installed
+if (!requireNamespace("readxl", quietly = TRUE)) {
+  install.packages("readxl")
+}
+
+
+# Load the readxl library
+library(readxl)
+
+```
+
+# Read and display a row of data
+
+```{r}
+
+# Read the .xlsx file
+SDGPref_Arunachal_raw <- read_excel("local-data/SDGPreferences_Arunachal.xlsx")
+
+# Display the first rows of the data
+head(SDGPref_Arunachal_raw, 1)
+```
+
