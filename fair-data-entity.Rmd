@@ -1,3 +1,8 @@
+---
+toc: true
+toc_float: true
+---
+
 # FAIR data entity test
 
 ## Purpose of this document
@@ -21,17 +26,47 @@ if (!requireNamespace("readxl", quietly = TRUE)) {
 
 # Load the readxl library
 library(readxl)
+library(tidyverse)
 
 ```
 
 # Read and display a row of data
 
 ```{r}
-
 # Read the .xlsx file
 SDGPref_Arunachal_raw <- read_excel("local-data/SDGPreferences_Arunachal.xlsx")
 
+# Dimensions of data
+dim(SDGPref_Arunachal_raw)
+
 # Display the first rows of the data
 head(SDGPref_Arunachal_raw, 1)
+```
+
+# Test an assumption about the data
+
+> Nerds, I'm going to write a function that finds the set of minimal unique combination of columns that define a row in a table in R unless we find a tool that does that for me. 
+
+We assume the rows of `SDGPref_Arunachal_raw` are uniquely identified by `Respondents`.
+
+```{r}
+n_unique_key <- SDGPref_Arunachal_raw |>
+  # here is where we set the assumption about the unique combination of columns
+  select(Respondents) |>
+  # this line removes duplicates (which shouldn't exist)
+  distinct() |>
+  # count how many 
+  nrow()
+
+# print result
+n_unique_key
+
+```
+
+We compare with the number of rows in `SDGPref_Arunachal_raw`.
+
+```{r}
+n_unique_key == nrow(SDGPref_Arunachal_raw)
+
 ```
 

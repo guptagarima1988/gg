@@ -1,53 +1,83 @@
-# Charles & Garima
+# Garima x Good Enough Lab
 
-Hi Garima,
+## What this project is for
 
-I only know how to do "the code bit". You have really important scientific things to say.  
+- We want to help you with `the code bit` so you can focus on important science; that means making it easier for you to answer scientific questions. 
+- We will not share any data or code until you decide what to publish. 
+- The Lab manage your projects and support needs by [issues](https://github.com/softloud/gg/issues), where you can comment and oversee, if you want to look into what we are working on.   
 
-Consider the Good Enough Data & Systems Lab as your coding accompanist; like a piano accompanist is hired to play at a performance where the soloist chooses the music, the venue, etc. 
+## Structure of this project
 
-How can we help you do good enough science? 
+```sh
+.
+├── fair-data-entity.html
+├── fair-data-entity.Rmd
+├── local-data
+│   ├── sdg (all 17).png
+│   └── SDGPreferences_Arunachal.xlsx
+└── README.md
 
-# The code bit
+2 directories, 5 files
+```
 
-This online space is where I can share the code bits you need with you.
+### Local data 
 
-# Why be good at everything? 
+1. Create local-data  in this repository.
 
-I cannot ever catch up to your knowledge about sustainable development. 
+2. Copy and paste your data to `local-data`.
 
-I can't think of anything cooler than helping someone (you) who can see the mismatch in priorities
-between government, people, and ecology say what needs saying in the global south.
+Your data is secure. The `.gitignore` setting will prevent this data from being sent to the cloud repository. 
 
-You decide what needs saying. The Good Enough Data & Systems Lab will help you with the code bits
-that will help you say the important things that so often only someone like you understands.
+```sh
+.
+├── sdg (all 17).png
+└── SDGPreferences_Arunachal.xlsx
 
-# Cross-disciplinary collaboration 
+1 directory, 2 files
 
-A frustration the Good Enough Lab has is with poorly applied computation. Instead of feeling like
-you should learn to code better, let's figure out the smoothest way for the Good Enough Lab to help
-you. Why do scientists like you feel like they also have to code? Wouldn't it be better to find Good Enough 
-ways for coders like me to collaborate with scientists like you?
+```
 
-## Starting suggestion
+## Get started
 
-Issues are a way for us to make notes on a specific work item.
+These steps will help you get the project running on your local Windows machine.
 
-- Garima opens an [issue](https://github.com/softloud/gg/issues) for each coding thing she is slowed down by
-- Charles will comment on the issue with progress or clarifications
+### 1. Install R and RStudio
 
-### Garima's ideas
+- Install R: [https://cran.r-project.org](https://cran.r-project.org)
+- Install RStudio (free version): [https://posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop)
 
-Garima, anything that would make life easier with "the code bit", throw the idea down as an [issue](https://github.com/softloud/gg/issues) for us to solve.
+### 2. Get the project
 
-## Side benefits
+You can either:
 
-- Finding out a Good Enough way to collaborate across disciplines is potentially publishable in scientific epistemology
-- The Good Enough Lab is writing applied mathematics papers on scientific systems epistemology and will use these projects as examples, so you become second author on those
-- The Good Enough Lab will publish in the open in any case
-- Blog provides a place where we can communicate the shitfuckery of systems; the stupid decisions made by leadership that cause real-world harm
+- **Option A: Clone the repo**
+  1. Install [Git for Windows](https://git-scm.com/)
+  2. Open Git Bash or the RStudio terminal, then run:
+     ```bash
+     git clone https://github.com/softloud/gg.git
+     ```
 
+- **Option B: Download as ZIP**
+  1. Click “Code” → “Download ZIP” on the GitHub repo
+  2. Extract the ZIP file to your preferred folder
 
+### 3. Open the project
 
+- Open RStudio
+- Click “File” → “Open Project…” and select the `.Rproj` file in the folder
 
+### 4. Load your data
 
+- Create a folder called `local-data` inside the project
+- Save your data files into that folder. It is already `.gitignore`d, so your data will stay private
+
+### 5. Restore the environment with `renv`
+
+This project uses [`renv`](https://rstudio.github.io/renv/) to manage packages.
+
+In the RStudio Console, run:
+
+```r
+install.packages("renv")
+renv::restore()
+```
