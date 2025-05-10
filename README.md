@@ -20,22 +20,17 @@
 2 directories, 5 files
 ```
 
+### FAIR data entity test
+
+`fair-data-entity.Rmd` is a FAIR data entity test; this serves a few functions, the most of important of which is ensuring you can run and extend scripts the Lab writes for you in a way that makes sense to you and isn't too annoying at your end. 
+
+### Migration of existing project
+
+Once we have a FAIR data entity test working at your end, we migrate an existing project--probably one of the bar plots. 
+
 ### Local data 
 
-1. Create local-data  in this repository.
-
-2. Copy and paste your data to `local-data`.
-
 Your data is secure. The `.gitignore` setting will prevent this data from being sent to the cloud repository. 
-
-```sh
-.
-├── sdg (all 17).png
-└── SDGPreferences_Arunachal.xlsx
-
-1 directory, 2 files
-
-```
 
 ## Get started
 

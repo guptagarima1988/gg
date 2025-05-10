@@ -1,4 +1,5 @@
 ---
+title: FAIR data entity test
 toc: true
 toc_float: true
 ---
@@ -18,21 +19,32 @@ This folder does not push your development data to the internet, and ensures pri
 ## Install readxl to read excel file into R
 
 ```{r}
-# Install the readxl package if not already installed
-if (!requireNamespace("readxl", quietly = TRUE)) {
-  install.packages("readxl")
-}
-
 
 # Load the readxl library
 library(readxl)
 library(tidyverse)
+```
+
+# Set local path
+
+Here we set where the data are located.
+
+```{r}
+# set directory your data is in
+data_path <- "local-data"
+
+# set name of file
+data_file <- "SDGPreferences_Arunachal.xlsx"
+
 
 ```
 
 # Read and display a row of data
 
 ```{r}
+# Error if file is not where
+stopifnot(file.exists("local-data/SDGPreferences_Arunachal.xlsx"))
+
 # Read the .xlsx file
 SDGPref_Arunachal_raw <- read_excel("local-data/SDGPreferences_Arunachal.xlsx")
 
@@ -55,18 +67,16 @@ n_unique_key <- SDGPref_Arunachal_raw |>
   select(Respondents) |>
   # this line removes duplicates (which shouldn't exist)
   distinct() |>
-  # count how many 
+  # count how many
   nrow()
 
 # print result
 n_unique_key
-
 ```
 
 We compare with the number of rows in `SDGPref_Arunachal_raw`.
 
 ```{r}
 n_unique_key == nrow(SDGPref_Arunachal_raw)
-
 ```
 

@@ -1,0 +1,35 @@
+# Data validation
+
+- focus was on dams
+- two distinct geographic regions: Western Himalaya (Tehri) and Eastern Himalaya (Arunachal)
+- Tehri is where the dam exists-commissioned in 2006, displaced 100K people
+- lots of dam development in Arunachal 
+- also a biodiversity hotspot, 80% forest cover
+
+- what are the group-level community SDGs in Arunachal and Tehri? How might we interpret these results in light of the prioritisation of dams?
+
+- region of focus was chosen because Arunachal has a lot of dam development, home to many diverse indigenous communities, and biodiversity as well
+
+## Categories of respondents
+
+- displaced (by dam)
+- affected but not displaced (indirectly affected by dam)
+- downstream (of the dam)
+- benefitted by not affected (by the dam)
+
+## Different experiments
+
+- number of SDGs was restricted in one question
+- number of SDGs unrestricted in another question
+- Arunachal were not asked to choose five
+
+## Respondents
+
+- one group had a couple of hundred, the other group was much smaller 
+
+## Data types
+
+- two large geographic regions (Tehri vs Arunachal)
+- two different sample sizes by region
+- smaller communities in each region
+
