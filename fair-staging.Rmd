@@ -1,0 +1,86 @@
+# FAIR staging
+
+## Input
+
+Raw datasets provided.
+
+## Output
+
+Clean datasets in same shape provided with unique key.
+
+## Set up
+
+```{r }
+#| message: false
+
+library(tidyverse)
+library(readxl)
+library(janitor)
+
+```
+
+## get the data
+
+```{r}
+# Read the .xlsx file
+SDGPref_Arunachal_raw <- read_excel("local-data/SDGPreferences_Arunachal.xlsx") |>
+	clean_names() |>
+	rename(respondant = respondents)
+
+# Dimensions of data
+dim(SDGPref_Arunachal_raw)
+
+# Display the first rows of the data
+head(SDGPref_Arunachal_raw, 3)
+```
+
+
+```{r}
+# Read the .xlsx file
+SDG_raw <- read_csv("local-data/SDG.csv") |>
+	clean_names()
+
+# Dimensions of data
+dim(SDG_raw)
+
+# Display the first rows of the data
+head(SDG_raw, 3)
+
+```
+
+## Clean SDGPref_Arunachal_raw
+
+```{r}
+
+staging_respondant <- SDGPref_Arunachal_raw |>
+	select(respondant, age, gender) 
+
+staging_responses_long <- 
+	SDGPref_Arunachal_raw |>
+		clean_names() |>
+		select(-c(x9, age, gender)) |>
+		pivot_longer(cols = -respondant,
+		names_to = "preference",
+		values_to = "sdg") 
+
+# Help me with this bit, please, Mooncake
+staging_responses <-		
+	staging_responses_long |>
+		mutate(
+			# remove space so the labelling in datasets will match
+			sdg = str_remove(sdg, "\\s"),
+			# extract 2nd string as an integer for numeric preference
+		preference_rank = parse_number(preference),       # extract numeric rank (1, 2, ...)
+			# extract 2nd to 4th character from the string in preference_label
+    preference_label = str_sub(preference, 2, 4)   
+		) |>
+		select(-preference)
+
+
+staging_sdg <- SDG_raw |>
+	clean_names()
+
+
+
+```
+
