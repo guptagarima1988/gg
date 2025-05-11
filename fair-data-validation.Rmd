@@ -27,9 +27,30 @@
 
 - one group had a couple of hundred, the other group was much smaller 
 
-## Data types
+## Notes
 
 - two large geographic regions (Tehri vs Arunachal)
 - two different sample sizes by region
 - smaller communities in each region
+
+## Data entities
+
+- respondents + attributes
+- SDG + attributes
+- geograph regions + attributes
+- preferences
+
+# Poke the data with a stick
+
+Have we identified all of the data entities required? 
+
+## What artifacts did we get?
+
+### Two barplots 
+
+These were starting points. Garima didn't feel like she was answering all the questions she could with the datasets. 
+
+These will be our initial migration.
+
+### An R cleaning script
 
