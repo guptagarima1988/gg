@@ -1,0 +1,28 @@
+---
+toc: true
+toc_float: true
+---
+
+# Fair migration
+
+## set up
+
+```{r}
+#| message:false
+
+library(tidyverse)
+
+```
+
+This file expects all scripts in `pipeline` have been run locally.
+
+```{r}
+#| error: true
+
+ao_responses <- read_csv("local-data/ao_responses.csv")
+
+
+```
+
+
+

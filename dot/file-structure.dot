@@ -1,0 +1,21 @@
+digraph G {
+    rankdir=BT
+
+    subgraph cluster_validation {
+        style = dashed
+
+        validation [shape=box, style=dashed]
+
+        dontpanic->entity->entities->migration [style=dashed]
+    }
+
+    subgraph cluster_pipeline { 
+        style = dashed
+
+        pipeline [shape=box, style=dashed]
+
+        staging->semantic->analytical [style=dashed]
+
+    }
+
+}

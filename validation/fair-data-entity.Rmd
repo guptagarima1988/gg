@@ -19,10 +19,12 @@ This folder does not push your development data to the internet, and ensures pri
 ## Install readxl to read excel file into R
 
 ```{r}
+#| message: false
 
 # Load the readxl library
 library(readxl)
 library(tidyverse)
+
 ```
 
 # Set local path
@@ -31,7 +33,7 @@ Here we set where the data are located.
 
 ```{r}
 # set directory your data is in
-data_path <- "local-data"
+data_path <- "../local-data"
 
 # set name of file
 data_file <- "SDGPreferences_Arunachal.xlsx"
@@ -42,11 +44,8 @@ data_file <- "SDGPreferences_Arunachal.xlsx"
 # Read and display a row of data
 
 ```{r}
-# Error if file is not where
-stopifnot(file.exists("local-data/SDGPreferences_Arunachal.xlsx"))
-
 # Read the .xlsx file
-SDGPref_Arunachal_raw <- read_excel("local-data/SDGPreferences_Arunachal.xlsx")
+SDGPref_Arunachal_raw <- read_excel("../data-raw/SDGPreferences_Arunachal.xlsx")
 
 # Dimensions of data
 dim(SDGPref_Arunachal_raw)
