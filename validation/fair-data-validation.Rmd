@@ -1,4 +1,42 @@
-# Data validation
+# Validation questions for Garima
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    error = TRUE,
+    message = FALSE
+)
+```
+
+```{r pkg}
+
+# pkg
+library(tidyverse)
+library(here)
+
+# other things
+pipeline_path <- here("pipeline", "pipeline-data")
+
+```
+
+> Garima: Do you expect this many respondents from Arunachal? 
+
+```{r}
+
+nrow(read_csv(here(pipeline_path, "staging_responses_arunachal.csv")))
+
+```
+
+> Garima: Do you expect this many respondents from Tehri?
+
+```{r}
+
+nrow(read_csv(here(pipeline_path, "staging_responses_tehri.csv")))
+
+```
+
+
+# Data validation notes
 
 - focus was on dams
 - two distinct geographic regions: Western Himalaya (Tehri) and Eastern Himalaya (Arunachal)
@@ -53,4 +91,3 @@ These were starting points. Garima didn't feel like she was answering all the qu
 These will be our initial migration.
 
 ### An R cleaning script
-

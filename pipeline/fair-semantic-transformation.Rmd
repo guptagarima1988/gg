@@ -1,0 +1,98 @@
+
+## Munge the simulated data into desired entities
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  message = FALSE
+)
+```
+
+
+```{r}
+# pkg
+library(tidyverse)
+library(here)
+
+pipeline_path <- here("pipeline", "pipeline-data")
+
+```
+
+## get staging
+
+```{r}
+
+# get data
+
+staging_top_3_arunachal <- read_csv(
+  here(pipeline_path, "staging_top_3_arunachal.csv")
+)
+
+staging_top_3_tehri <- read_csv(
+  here(pipeline_path, "staging_top_3_tehri.csv")
+)
+
+staging_respondent_arunachal <- read_csv(
+  here(pipeline_path, "staging_respondent_arunachal.csv")
+)
+
+staging_respondent_tehri <- read_csv(
+  here(pipeline_path, "staging_respondent_tehri.csv")
+)
+
+
+```
+
+
+## create semantic entities
+
+### top 3 wide
+
+```{r}
+
+# select the specific columns to do with that question
+
+semantic_top_3 <- bind_rows(staging_top_3_arunachal, staging_top_3_tehri)
+
+```
+
+## respondents
+
+```{r}
+
+semantic_respondent <- bind_rows(
+  staging_respondent_arunachal,
+  staging_respondent_tehri
+)
+
+```
+
+
+## display semantic entities
+
+```{r}
+head(semantic_respondent, 3)
+head(semantic_top_3, 3)
+
+```
+
+## check semantic entities
+
+```{r}
+#| message: true
+
+source(here("R", "ge_unique_key.R"))
+
+ge_unique_key(semantic_top_3, "response_id")
+ge_unique_key(semantic_respondent, "respondent_id")
+
+```
+
+## write semantic entities
+
+```{r}
+write_csv(semantic_top_3, here(pipeline_path, "semantic_top_3.csv"))
+write_csv(semantic_respondent, here(pipeline_path, "semantic_respondent.csv"))
+
+```

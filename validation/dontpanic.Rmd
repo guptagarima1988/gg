@@ -1,0 +1,28 @@
+# dontpanic test
+
+This is the first piece of code to run: the `dontpanic test`. 
+
+## intention
+
+The purpose of this test is to check your workflow is functional.
+
+## store value
+
+We store a number in a computational object.
+
+```{r}
+
+dontpanic <- 42
+
+```
+
+## return value
+
+And return the data that object stores. 
+```{r}
+
+dontpanic
+
+```
+
+If all is working, you will see `[1] 42` printed.
