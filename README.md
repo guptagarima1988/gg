@@ -11,18 +11,20 @@
 ![](dot/fair-structure.svg)
 
 ```sh
+cantabile@lappy486:~/Documents/repos/gg$ tree -L 1
 .
-├── fair-analysis-migration.Rmd
-├── fair-data-entity.Rmd
-├── fair-data-validation.Rmd
-├── fair-staging.Rmd
-├── data-raw --> not sent to cloud 
+├── data-raw
+├── dot
+├── galllery
+├── local-data
+├── pipeline
 ├── R
 ├── README.md
 ├── renv
-└── renv.lock
+├── renv.lock
+└── validation
 
-2 directories, 5 files
+9 directories, 2 files
 ```
 
 ### Configured not to send to cloud
@@ -44,6 +46,46 @@ system diagram | dir | file name | description | input | output | observer
 `analytical` | pipeline | `fair-analytical-observations.Rmd` | FAIR analytical observation: plot-specific tables | fair-semantic-transformation output | Tables for specific analyses, `data-raw/ao_*.csv`| Dr Gupta 
  | R | `*.R` |A place to document data sets in `roxygen` and store helper functions. | Source functions, and the basis of a packaged analysis with data in R. | potentially anywhere in pipeline | Functions to source. | Lab
 
+#### valildation
+
+```sh
+
+cantabile@lappy486:~/Documents/repos/gg/validation$ tree -L 1
+.
+├── dontpanic.Rmd
+├── fair-analysis-migration.Rmd
+├── fair-data-entity.Rmd
+├── fair-data-validation.Rmd
+└── fair-unique-key-check.R
+
+1 directory, 5 files
+
+```
+
+#### 
+
+#### pipeline
+
+```sh
+
+cantabile@lappy486:~/Documents/repos/gg/pipeline$ tree -L 2
+.
+├── fair-analytical-observations.Rmd
+├── fair-semantic-transformation.Rmd
+├── fair-staging.Rmd
+└── pipeline-data
+    ├── semantic_respondent.csv
+    ├── semantic_top_3.csv
+    ├── staging_respondent_arunachal.csv
+    ├── staging_respondent_tehri.csv
+    ├── staging_sdg.csv
+    ├── staging_top_3_arunachal.csv
+    └── staging_top_3_tehri.csv
+
+2 directories, 10 files
+
+```
+
 #### Development strategy
 
 Our priority is to make the analysis FAIR to Dr Gupta, while also helping with the `the code bit`: findable, accessible, interoperable, reusable. There's lots of detail on the website, but I tend to find that people pile so much complexity on the analysis downstream, the architecture is always on fire, and thus we do not ever achieve bare minimum FAIR for the analyst who matters the most. 
@@ -56,13 +98,17 @@ This is also a sketch of a living analysis pipeline design, so we can aggregate 
 
 ## Known problem
 
-`fair-staging.Rmd` is a hack based on transformed data, with geographic marker simulated. 
+Data extraction requires geographic entities and displacement status. 
 
-Data extraction requires geographic entities. 
+Kobo extraction refactoring will make this much easier to tweak. 
 
-Kobo extraction refactoring will make this much easier to tweak. This is the first big issue to solve. 
+This is the first big issue to solve. 
 
 ## Validations
+
+### `dontpanic` test
+
+Display `42` on Dr Gupta's screen to check workflow functionality.
 
 ### FAIR data entity test
 
@@ -70,7 +116,7 @@ Kobo extraction refactoring will make this much easier to tweak. This is the fir
 
 #### Migration of existing project
 
-Once we have a FAIR data entity test working at your end, we migrate an existing project--probably one of the bar plots. 
+Once we have a FAIR data entity test working at your end, we migrate an existing project--probably one of the bar plots. We prioritise this over any new analysis. 
 
 ## Data entities and analytical observations
 
@@ -84,7 +130,7 @@ Various `.csv` files will be output by the pipeline to `data-raw/`.
 
 These are your cleaned up datasets that you can load and explore. See the file structure table for where to find the scripts for each.
 
-### Local data 
+### data-raw 
 
 Your data is secure. The `.gitignore` setting will prevent this data from being sent to the cloud repository. 
 
