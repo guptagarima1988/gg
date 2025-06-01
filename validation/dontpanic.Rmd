@@ -28,6 +28,7 @@ dontpanic
 If all is working, you will see `[1] 42` printed.
 
 ## dontpanictest
+
 ```{r}
 dontpanic <- 'test'
 
@@ -36,3 +37,12 @@ dontpanic
 
 ```
 
+## another dontpanictest
+
+```{r}
+
+dontpanic <- "hello, world"
+
+dontpanic
+
+```
