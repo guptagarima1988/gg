@@ -24,6 +24,7 @@ This folder does not push your development data to the internet, and ensures pri
 # Load the readxl library
 library(readxl)
 library(tidyverse)
+library(here)
 
 ```
 
@@ -33,7 +34,7 @@ Here we set where the data are located.
 
 ```{r}
 # set directory your data is in
-data_path <- "../local-data"
+data_path <- "data-raw"
 
 # set name of file
 data_file <- "SDGPreferences_Arunachal.xlsx"
@@ -45,7 +46,7 @@ data_file <- "SDGPreferences_Arunachal.xlsx"
 
 ```{r}
 # Read the .xlsx file
-SDGPref_Arunachal_raw <- read_excel("../data-raw/SDGPreferences_Arunachal.xlsx")
+SDGPref_Arunachal_raw <- read_excel(here(data_path, data_file))
 
 # Dimensions of data
 dim(SDGPref_Arunachal_raw)
@@ -79,3 +80,14 @@ We compare with the number of rows in `SDGPref_Arunachal_raw`.
 n_unique_key == nrow(SDGPref_Arunachal_raw)
 ```
 
+## Unique key test
+
+We will use a custom function that includes this test for this project.
+
+```{r}
+
+source(here("R/ge_unique_key.R"))
+
+ge_unique_key(SDGPref_Arunachal_raw, "Respondents")
+
+```
