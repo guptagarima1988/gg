@@ -1,5 +1,14 @@
 digraph G {
     rankdir=BT
+    
+    subgraph cluster_analysis {
+        style = dashed
+
+        analysis [shape=box, style=dashed]
+        giveadamn [label="give-a-dam"]
+
+        gallery -> giveadamn [style=dashed]
+    }
 
     subgraph cluster_validation {
         style = dashed
