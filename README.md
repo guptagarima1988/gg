@@ -6,6 +6,10 @@
 - We will not share any data or code until you decide what to publish, lots of development will be done with simulated data. 
 - The Lab manage your projects and support needs by [issues](https://github.com/softloud/gg/issues), where you can comment and oversee, if you want to look into what we are working on.   
 
+## Forking workflow
+
+We are using this [forking workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) for sharing via git.
+
 ## Structure of this project
 
 ![](dot/fair-structure.svg)
