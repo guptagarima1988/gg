@@ -6,3 +6,4 @@ README_files
 
 pipeline/pipeline-data/
 data-raw/
+pipeline/*.html

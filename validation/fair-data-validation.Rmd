@@ -1,6 +1,6 @@
 # Validation questions for Garima
 
-```{r setup, include = FALSE}
+```{r setup val, include = FALSE}
 knitr::opts_chunk$set(
     error = TRUE,
     message = FALSE
@@ -17,22 +17,13 @@ library(readxl)
 pipeline_path <- here("pipeline", "pipeline-data")
 ```
 
-> Garima: Do you expect this many respondents from Arunachal? 
+
+# Assumptions about arrows in pipeline
 
 # Run pipeline
 
-This chunk needs to be run before knitting so that the data exists. 
+> Key requirement: Make sure you can knit all the .Rmds in the `pipeline` directory.
 
-```{r eval=FALSE}
-# Run extraction of entities from source
-knitr::knit_child(here("pipeline", "fair-staging.Rmd"))
-
-# Run semantic transformation of entities
-knitr::knit_child(here("pipeline", "fair-semantic-transformation.Rmd"))
-
-# Run analytical entities
-knitr::knit_child(here("pipeline", "fair-analytical-observations.Rmd"))
-```
 
 # Source data validation
 
@@ -131,31 +122,21 @@ digraph G {
 
 ## Load data
 
-
 ```{r}
-getwd()
-
-here(pipeline_path, "staging_top_3_arunachal.csv")
-
-```
-
-```{r}
-
 # read in responses from arunachal
-source_top_3_arunachal <- read_csv(here(pipeline_path, "staging_top_3_arunachal.csv"))
+source_top_3_arunachal <- read_csv(here(pipeline_path, "source_top_3_arunachal.csv"))
 
 # read in responses from tehri
-source_top_3_tehri <- read_csv(here(pipeline_path, "staging_top_3_tehri.csv"))
+source_top_3_tehri <- read_csv(here(pipeline_path, "source_top_3_tehri.csv"))
 
 # read in respondents from arunachal
-source_respondent_arunachal <- read_csv(here(pipeline_path, "staging_respondent_arunachal.csv"))
+source_respondent_arunachal <- read_csv(here(pipeline_path, "source_respondent_arunachal.csv"))
 
 # read in respondents from tehri
-source_respondent_tehri <- read_csv(here(pipeline_path, "staging_respondent_tehri.csv"))
+source_respondent_tehri <- read_csv(here(pipeline_path, "source_respondent_tehri.csv"))
 
 # read in sdg metadata
-source_sdg <- read_csv(here(pipeline_path, "staging_sdg.csv"))
-
+source_sdg <- read_csv(here(pipeline_path, "source_sdg.csv"))
 ```
 
 
@@ -165,26 +146,22 @@ Important things to check. There is a response id that has the same dimensionali
 
 ```{r, message=TRUE}
 ge_unique_key(source_top_3_arunachal, "response_id")
-
 ```
 
 
 ```{r, message=TRUE}
 ge_unique_key(source_top_3_tehri, "response_id")
-
 ```
 
 We also need geographic.
 
 ```{r, message=TRUE}
 table(source_respondent_tehri$region)
-
 ```
 
 
 ```{r, message=TRUE}
 table(source_respondent_arunachal$region)
-
 ```
 
 
@@ -193,8 +170,6 @@ table(source_respondent_arunachal$region)
 
 ```{r, message=TRUE}
 ge_unique_key(source_sdg, "sdg_id")
-
-
 ```
 
 ## Respondents by region
@@ -205,15 +180,94 @@ ge_unique_key(source_respondent_arunachal, "respondent_id")
 
 # check tehri
 ge_unique_key(source_respondent_tehri, "respondent_id")
-
-
 ```
 
 
 
+# Assumptions about the semantic arrow
+
+What are the tables in this arrow? 
+
+```{dot, fig.width=2, fig.height=2}
+
+digraph G {
+    rankdir=BT
+
+    semantic -> analytical
+}
+
+
+```
+
+## Load the data
+
+```{r}
+semantic_top_3 <- read_csv(here(pipeline_path, "semantic_top_3.csv"))
+
+semantic_respondent <- read_csv(here(pipeline_path, "semantic_respondent.csv"))
+```
+
+## Test duplicates & missingness
+
+```{r message=TRUE}
+ge_unique_key(semantic_top_3, "response_id")
+
+# confirm assumption still holds
+ge_unique_key(semantic_top_3, c("respondent_id", "preference"))
+
+
+ge_unique_key(semantic_respondent, "respondent_id")
+```
+
 ## Respondents by region
 
-## SDG metadata
+We should now have both regions in the dataset.
+
+```{r}
+table(semantic_respondent$region)
+```
+
+
+# Assumptions about analytical layer
+
+Here we provide enriched responses.
+
+```{dot, fig.height=2,  fig.width=2}
+
+digraph A {
+    rankdir=BT
+    analytical -> analysis
+}
+
+```
+
+## Load data
+
+```{r}
+
+analytical_ranking_top_3 <- read_csv(here(pipeline_path, "analytical_ranking_top_3.csv"))
+
+```
+
+## Test duplicates & missingness
+
+```{r message=TRUE}
+ge_unique_key(analytical_ranking_top_3, "response_id")
+
+ge_unique_key(analytical_ranking_top_3, c("respondent_id", "ranking"))
+
+
+```
+
+## Test geographical
+
+```{r}
+table(analytical_ranking_top_3$region, analytical_ranking_top_3$ranking)
+
+```
+
+
+## Test displacement status
 
 
 # Data validation notes

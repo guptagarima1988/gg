@@ -88,7 +88,7 @@ subgraph cluster_sis {
 
     human -> raw [color="#6B7B3A"]
     garima -> giveadamn [color="#CC5500"]
-    source -> entity
+    raw -> entity
     source -> entities
     semantic -> entities
     analytical -> entities

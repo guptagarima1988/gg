@@ -19,26 +19,26 @@ pipeline_path <- here("pipeline", "pipeline-data")
 
 ```
 
-## get staging
+## get 
 
 ```{r}
 
 # get data
 
-staging_top_3_arunachal <- read_csv(
-  here(pipeline_path, "staging_top_3_arunachal.csv")
+source_top_3_arunachal <- read_csv(
+  here(pipeline_path, "source_top_3_arunachal.csv")
 )
 
-staging_top_3_tehri <- read_csv(
-  here(pipeline_path, "staging_top_3_tehri.csv")
+source_top_3_tehri <- read_csv(
+  here(pipeline_path, "source_top_3_tehri.csv")
 )
 
-staging_respondent_arunachal <- read_csv(
-  here(pipeline_path, "staging_respondent_arunachal.csv")
+source_respondent_arunachal <- read_csv(
+  here(pipeline_path, "source_respondent_arunachal.csv")
 )
 
-staging_respondent_tehri <- read_csv(
-  here(pipeline_path, "staging_respondent_tehri.csv")
+source_respondent_tehri <- read_csv(
+  here(pipeline_path, "source_respondent_tehri.csv")
 )
 
 
@@ -53,7 +53,8 @@ staging_respondent_tehri <- read_csv(
 
 # select the specific columns to do with that question
 
-semantic_top_3 <- bind_rows(staging_top_3_arunachal, staging_top_3_tehri)
+semantic_top_3 <- bind_rows(source_top_3_arunachal, source_top_3_tehri) |>
+  rename(ranking = preference)
 
 ```
 
@@ -62,8 +63,8 @@ semantic_top_3 <- bind_rows(staging_top_3_arunachal, staging_top_3_tehri)
 ```{r}
 
 semantic_respondent <- bind_rows(
-  staging_respondent_arunachal,
-  staging_respondent_tehri
+  source_respondent_arunachal,
+  source_respondent_tehri
 )
 
 ```
@@ -92,6 +93,7 @@ ge_unique_key(semantic_respondent, "respondent_id")
 ## write semantic entities
 
 ```{r}
+
 write_csv(semantic_top_3, here(pipeline_path, "semantic_top_3.csv"))
 write_csv(semantic_respondent, here(pipeline_path, "semantic_respondent.csv"))
 

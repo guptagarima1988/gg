@@ -44,14 +44,14 @@ See `.gitignore` for more details.
 ### Directories & Files
 
 
-system diagram | dir | file name | description | input | output | observer
+sig diagram | directory | file name | description | input | output | observer
 --- |--- | --- | --- | --- | --- | ---
 `dontpanic` | validation | `dontpanic.Rmd` | No input. | No output. | Dr Gupta.
 `entity` | validation | `fair-data-entity.Rmd` | FAIR data entity test (QAO paper), unique & not null on a single row of one entities | table. | One table copied into `data-raw/`. | No output. | Dr Gupta  
 `entities` | validation | `fair-data-validation.Rmd` | Our shared assumptions and confirmations about data. | All source tables provided. | No output. | Dr Gupta
 `migration`| validation | `fair-analysis-migration.Rmd` | | `local_data/entity_*.csv` and `local_data/ao_*.csv` | No output. | Dr Gupta
-`staging` | pipeline | `fair-staging.Rmd` | FAIR staging | raw files as provided | `data-raw/staging_*.csv` tables. | Dr Gupta 
-`semantic`| pipeline | `fair-semantic-transformation.Rmd` | FAIR transformation | fair-staging output as computational objects | tables whose rows are uniquely identified by semantic identities (SDG, responses, respondents, geographic metadata) `data-raw/entity_*.csv` | Dr Gupta 
+`source` | pipeline | `pipeline-source.Rmd` | FAIR source | raw files as provided | `data-raw/source_*.csv` tables. | Dr Gupta 
+`semantic`| pipeline | `fair-semantic-transformation.Rmd` | FAIR transformation | fair-source output as computational objects | tables whose rows are uniquely identified by semantic identities (SDG, responses, respondents, geographic metadata) `data-raw/entity_*.csv` | Dr Gupta 
 `analytical` | pipeline | `fair-analytical-observations.Rmd` | FAIR analytical observation: plot-specific tables | fair-semantic-transformation output | Tables for specific analyses, `data-raw/ao_*.csv`| Dr Gupta 
  | R | `*.R` |A place to document data sets in `roxygen` and store helper functions. | Source functions, and the basis of a packaged analysis with data in R. | potentially anywhere in pipeline | Functions to source. | Lab
 
@@ -105,7 +105,7 @@ A data entity represents a variable of interest in the analysis. This might be g
 
 Various `.csv` files will be output by the pipeline to `data-raw/`. 
 
-- `staging_*.csv` indicate cleaned up raw entities
+- `source_*.csv` indicate cleaned up raw entities
 - `entity_*.csv` indicate one row per entity
 - `ao_*.csv` indicate an input created for a specific analysis, and rich data entities with common joins
 

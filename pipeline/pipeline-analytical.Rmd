@@ -1,0 +1,68 @@
+# Read semantic entities
+
+```{r setup analytical layer, include = FALSE}
+knitr::opts_chunk$set(
+  error = TRUE,
+  message = FALSE
+)
+```
+
+
+```{r}
+# pkg
+library(tidyverse)
+library(here)
+
+pipeline_path <- here("pipeline", "pipeline-data")
+
+```
+
+## get the data
+
+```{r}
+
+semantic_top_3 <- read_csv(here(pipeline_path, "semantic_top_3.csv"))
+
+source_sdg <- read_csv(here(pipeline_path, "source_sdg.csv"))
+
+semantic_respondent <- read_csv(here(pipeline_path, "semantic_respondent.csv"))
+
+```
+
+## transform to analytical obs
+
+```{r}
+
+# take a look
+semantic_top_3 
+
+source_sdg
+
+semantic_respondent
+
+
+```
+
+```{r}
+
+# join 
+
+analytical_ranking_top_3 <- 
+  semantic_top_3 |>
+    left_join(
+      source_sdg, by = "sdg_id"
+    ) |>
+    left_join(
+      semantic_respondent, by = "respondent_id"
+    )
+
+```
+
+
+## write data
+
+```{r}
+
+write_csv(analytical_ranking_top_3, "pipeline/pipeline-data/analytical_ranking_top_3.csv")
+
+```
