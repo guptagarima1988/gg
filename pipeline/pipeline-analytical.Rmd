@@ -63,6 +63,6 @@ analytical_ranking_top_3 <-
 
 ```{r}
 
-write_csv(analytical_ranking_top_3, "pipeline/pipeline-data/analytical_ranking_top_3.csv")
+write_csv(analytical_ranking_top_3, here("pipeline/pipeline-data/analytical_ranking_top_3.csv"))
 
 ```
