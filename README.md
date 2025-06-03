@@ -10,6 +10,8 @@
 
 We are using this [forking workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow) for sharing via git.
 
+People at the Lab are always getting confused by git, we encourage you to reach out for support. 
+
 ## Structure of this project
 
 ![](dot/fair-structure.svg)
@@ -17,15 +19,15 @@ We are using this [forking workflow](https://www.atlassian.com/git/tutorials/com
 ```sh
 cantabile@lappy486:~/Documents/repos/gg$ tree -L 1
 .
+├── analysis
 ├── data-raw
-├── dot
-├── galllery
-├── local-data
-├── pipeline
+├── dot # dot-graph image scripts
+├── local-data # where Charles stores original data dump
+├── pipeline 
 ├── R
-├── README.md
-├── renv
-├── renv.lock
+├── README.md # document you are reading
+├── renv # package management
+├── renv.lock # package management 
 └── validation
 
 9 directories, 2 files
@@ -35,6 +37,9 @@ cantabile@lappy486:~/Documents/repos/gg$ tree -L 1
 
 - `renv/`
 - `data-raw/`
+- `local-data/`
+
+See `.gitignore` for more details.
 
 ### Directories & Files
 
@@ -50,47 +55,19 @@ system diagram | dir | file name | description | input | output | observer
 `analytical` | pipeline | `fair-analytical-observations.Rmd` | FAIR analytical observation: plot-specific tables | fair-semantic-transformation output | Tables for specific analyses, `data-raw/ao_*.csv`| Dr Gupta 
  | R | `*.R` |A place to document data sets in `roxygen` and store helper functions. | Source functions, and the basis of a packaged analysis with data in R. | potentially anywhere in pipeline | Functions to source. | Lab
 
-#### valildation
+#### valildation/
 
-```sh
+In the validation directory, you will find .Rmd files associated with the validation workflow.
 
-cantabile@lappy486:~/Documents/repos/gg/validation$ tree -L 1
-.
-├── dontpanic.Rmd
-├── fair-analysis-migration.Rmd
-├── fair-data-entity.Rmd
-├── fair-data-validation.Rmd
-└── fair-unique-key-check.R
+#### analysis/
 
-1 directory, 5 files
+Home to manuscript and gallery, slide decks, etc.
 
-```
+#### pipeline/
 
-#### 
+Data transformation.
 
-#### pipeline
-
-```sh
-
-cantabile@lappy486:~/Documents/repos/gg/pipeline$ tree -L 2
-.
-├── fair-analytical-observations.Rmd
-├── fair-semantic-transformation.Rmd
-├── fair-staging.Rmd
-└── pipeline-data
-    ├── semantic_respondent.csv
-    ├── semantic_top_3.csv
-    ├── staging_respondent_arunachal.csv
-    ├── staging_respondent_tehri.csv
-    ├── staging_sdg.csv
-    ├── staging_top_3_arunachal.csv
-    └── staging_top_3_tehri.csv
-
-2 directories, 10 files
-
-```
-
-#### Development strategy
+#### Development strategy: FAIR analysis
 
 Our priority is to make the analysis FAIR to Dr Gupta, while also helping with the `the code bit`: findable, accessible, interoperable, reusable. There's lots of detail on the website, but I tend to find that people pile so much complexity on the analysis downstream, the architecture is always on fire, and thus we do not ever achieve bare minimum FAIR for the analyst who matters the most. 
 
