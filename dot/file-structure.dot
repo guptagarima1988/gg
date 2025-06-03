@@ -1,17 +1,52 @@
 digraph G {
+    bgcolor="#F5ECD9"
     rankdir=BT
+    edge [style=dotted]
+    size="6,12"
+
+    subgraph cluster_representational {
+        rankdir=TB
+        style=dotted
+        node [shape=diamond, fillcolor="#CC5500B3", style=filled]
+        edge [style=dotted, color="#CC5500B3"]
+
+        repl [label="representational", shape=box, style=dotted]
+
+        repd [fillcolor="#6B7B3AB3"]
+
+        repn -> repd 
+        repd -> repr [color="#6B7B3A"]
+        repn -> repr [
+            label="giveadamn represents Garima's analysis",
+            color="#CC5500B3", fontcolor="#CC5500B3"]
+    }
+
+
+subgraph cluster_sis {
+    style="dotted"
     
+    sis [shape=box, style=dotted,
+        label="sis"]
+
+
+
+
     subgraph cluster_analysis {
         style = dashed
 
         analysis [shape=box, style=dashed]
-        giveadamn [label="give-a-dam"]
+
+        giveadamn [fillcolor="#CC5500B3", style=filled]
 
         gallery -> giveadamn [style=dashed]
     }
 
     subgraph cluster_validation {
         style = dashed
+
+        dontpanic [fillcolor="#6B7B3AB3", style=filled]
+        entity [fillcolor="#6B7B3AB3", style=filled]
+        entities [fillcolor="#CC5500B3", style=filled]
 
         validation [shape=box, style=dashed]
 
@@ -20,11 +55,48 @@ digraph G {
 
     subgraph cluster_pipeline { 
         style = dashed
+        edge [color="#CC5500B3"]
 
+
+        source [label="source", fillcolor="#CC5500B3", style=filled]
         pipeline [shape=box, style=dashed]
+        raw  [label="data-raw/",shape=hexagon, fillcolor="#6B7B3AB3", style=filled]
 
-        staging->semantic->analytical [style=dashed]
+        raw->source [color="#6B7B3A"]
+        source->semantic
+        semantic->analytical [style=dashed]
 
     }
+
+    subgraph cluster_humans {
+        node[shape=circle]
+        style="dashed"
+
+        human [style=dashed, shape=box]
+
+        charles [fillcolor="#6B7B3AB3", style=filled]
+        garima [fillcolor="#CC5500B3", style=filled]
+
+        garima
+        charles
+
+        garima -> charles [color="#6B7B3A"]
+    }
+}
+
+    analytical -> analysis [style=dotted]
+
+    human -> raw [color="#6B7B3A"]
+    garima -> giveadamn [color="#CC5500"]
+    source -> entity
+    source -> entities
+    semantic -> entities
+    analytical -> entities
+    analytical -> migration
+
+    repr -> human [color="#6B7B3A"]
+    repn -> giveadamn
+    repd -> raw
+    dontpanic -> giveadamn
 
 }

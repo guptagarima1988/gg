@@ -1,7 +1,5 @@
 # Validation questions for Garima
 
-# 
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
     error = TRUE,
@@ -10,14 +8,13 @@ knitr::opts_chunk$set(
 ```
 
 ```{r pkg}
-
 # pkg
 library(tidyverse)
 library(here)
+library(readxl)
 
 # other things
 pipeline_path <- here("pipeline", "pipeline-data")
-
 ```
 
 > Garima: Do you expect this many respondents from Arunachal? 
@@ -35,27 +32,188 @@ knitr::knit_child(here("pipeline", "fair-semantic-transformation.Rmd"))
 
 # Run analytical entities
 knitr::knit_child(here("pipeline", "fair-analytical-observations.Rmd"))
- 
+```
+
+# Source data validation
+
+What tables are in this arrow? 
+
+```{dot, fig.width=2, fig.height=2}
+
+digraph G {
+    rankdir=BT
+
+    raw [label="data-raw/", shape=hexagon]
+    raw -> source
+}
+
 
 ```
 
-# Load data
+## Load data
+
+```{r}
+# note that you can add as many columns as you like to these raw input datasets
+
+raw_path <- "data-raw"
+
+raw_responses_tehri <-
+    read_csv(here(
+        raw_path,
+        "Dam_and_You_-_all_versions_-_labels_-_2023-06-21-12-49-55.csv"
+    ))
+
+raw_responses_arunachal <-
+    read_excel(here(
+        raw_path,
+        "SDGPreferences_Arunachal.xlsx"
+    ))
+
+# you may wish to add more columns to SDGs, for example what top-level prioritise
+
+raw_sdg <-
+    read_csv(here(
+        raw_path,
+        "SDG.csv"
+    ))
+```
+
+## Assumptions about raw arrow
+
+The Lab understand the data to be one respondent's responses per row. 
 
 > Q for Garima: Do you expect this many respondents from Arunachal?
 
 ```{r}
-# need to refactor this - apply unique key test to extractions
-nrow(read_csv(here(pipeline_path, "staging_top_3_arunachal.csv")))
-
+nrow(raw_responses_arunachal)
 ```
 
 > Q for Garima: Do you expect this many respondents from Tehri?
 
 ```{r}
+nrow(raw_responses_tehri)
+```
 
-nrow(read_csv(here(pipeline_path, "staging_top_3_tehri.csv")))
+Now to use the Good Enough Lab analogous test.
+
+```{r}
+# source the function
+source(here("R", "ge_unique_key.R"))
+```
+
+Test each of the raw inputs on assumption on what columns  define a row.
+
+```{r, message=TRUE}
+# unique key test on arunachal responses
+ge_unique_key(raw_responses_arunachal, "Respondents")
+
+# unique key test on tehri responses, one row per respondent, no id
+ge_unique_key(raw_responses_tehri |> mutate(respondent_id = 1:n()), "respondent_id")
+
+# unique key test on sdg
+ge_unique_key(raw_sdg, "SDG")
+```
+
+# Assumptions about the source extraction arrow
+
+What are the tables in this arrow? 
+
+```{dot, fig.width=2, fig.height=2}
+
+digraph G {
+    rankdir=BT
+
+    source -> semantic
+}
+
 
 ```
+
+## Load data
+
+
+```{r}
+getwd()
+
+here(pipeline_path, "staging_top_3_arunachal.csv")
+
+```
+
+```{r}
+
+# read in responses from arunachal
+source_top_3_arunachal <- read_csv(here(pipeline_path, "staging_top_3_arunachal.csv"))
+
+# read in responses from tehri
+source_top_3_tehri <- read_csv(here(pipeline_path, "staging_top_3_tehri.csv"))
+
+# read in respondents from arunachal
+source_respondent_arunachal <- read_csv(here(pipeline_path, "staging_respondent_arunachal.csv"))
+
+# read in respondents from tehri
+source_respondent_tehri <- read_csv(here(pipeline_path, "staging_respondent_tehri.csv"))
+
+# read in sdg metadata
+source_sdg <- read_csv(here(pipeline_path, "staging_sdg.csv"))
+
+```
+
+
+## Rankings by region
+
+Important things to check. There is a response id that has the same dimensionality as the rank and respondent.
+
+```{r, message=TRUE}
+ge_unique_key(source_top_3_arunachal, "response_id")
+
+```
+
+
+```{r, message=TRUE}
+ge_unique_key(source_top_3_tehri, "response_id")
+
+```
+
+We also need geographic.
+
+```{r, message=TRUE}
+table(source_respondent_tehri$region)
+
+```
+
+
+```{r, message=TRUE}
+table(source_respondent_arunachal$region)
+
+```
+
+
+
+## SDG 
+
+```{r, message=TRUE}
+ge_unique_key(source_sdg, "sdg_id")
+
+
+```
+
+## Respondents by region
+
+```{r, message=TRUE}
+# check arunachal
+ge_unique_key(source_respondent_arunachal, "respondent_id")
+
+# check tehri
+ge_unique_key(source_respondent_tehri, "respondent_id")
+
+
+```
+
+
+
+## Respondents by region
+
+## SDG metadata
 
 
 # Data validation notes
