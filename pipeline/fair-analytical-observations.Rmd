@@ -1,6 +1,6 @@
 # Read semantic entities
 
-```{r setup, include = FALSE}
+```{r setup analytical, include = FALSE}
 knitr::opts_chunk$set(
   error = TRUE,
   message = FALSE

@@ -2,7 +2,7 @@
 ## Munge the simulated data into desired entities
 
 
-```{r setup, include = FALSE}
+```{r setup transformation, include = FALSE}
 knitr::opts_chunk$set(
   error = TRUE,
   message = FALSE

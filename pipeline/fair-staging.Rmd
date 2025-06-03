@@ -1,6 +1,6 @@
 # FAIR staging of source-specific data
 
-```{r setup, include = FALSE}
+```{r setup staging, include = FALSE}
 knitr::opts_chunk$set(
 	error = TRUE,
 	message = FALSE

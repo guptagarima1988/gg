@@ -1,5 +1,6 @@
 # Validation questions for Garima
 
+# 
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -21,17 +22,38 @@ pipeline_path <- here("pipeline", "pipeline-data")
 
 > Garima: Do you expect this many respondents from Arunachal? 
 
-```{r}
+# Run pipeline
 
-nrow(read_csv(here(pipeline_path, "staging_responses_arunachal.csv")))
+This chunk needs to be run before knitting so that the data exists. 
+
+```{r eval=FALSE}
+# Run extraction of entities from source
+knitr::knit_child(here("pipeline", "fair-staging.Rmd"))
+
+# Run semantic transformation of entities
+knitr::knit_child(here("pipeline", "fair-semantic-transformation.Rmd"))
+
+# Run analytical entities
+knitr::knit_child(here("pipeline", "fair-analytical-observations.Rmd"))
+ 
 
 ```
 
-> Garima: Do you expect this many respondents from Tehri?
+# Load data
+
+> Q for Garima: Do you expect this many respondents from Arunachal?
+
+```{r}
+# need to refactor this - apply unique key test to extractions
+nrow(read_csv(here(pipeline_path, "staging_top_3_arunachal.csv")))
+
+```
+
+> Q for Garima: Do you expect this many respondents from Tehri?
 
 ```{r}
 
-nrow(read_csv(here(pipeline_path, "staging_responses_tehri.csv")))
+nrow(read_csv(here(pipeline_path, "staging_top_3_tehri.csv")))
 
 ```
 
