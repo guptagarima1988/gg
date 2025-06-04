@@ -160,7 +160,18 @@ source_sdg <- source_top_3_tehri |>
 		str_detect(sdg_label, "resources") ~ "SDG 12",
 		TRUE ~ "todo"
 	)) |>
-	arrange(sdg_id)
+	mutate(
+		sdg_int = str_extract(sdg_id, "\\d+") |> as.integer(),
+		sdg_label = str_c(sdg_label, " (", sdg_id, ")"),
+		y = case_when(
+      sdg_int <= 6 ~ 3,
+      sdg_int <= 12 ~ 2,
+      TRUE ~ 1
+    ),
+    x = sdg_int %% 6,
+		x = if_else(x == 0, 6, x)
+	) |>
+	arrange(sdg_int)
 
 
 ```

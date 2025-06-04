@@ -2,11 +2,101 @@
 
 Good Enough Lab proofs of concept for Dr Gupta to consider.
 
-```{r}
+```{r message=FALSE}
 
 library(tidyverse)
+library(here)
+library(gt)
 
+
+```
+
+## pictogram
+
+```{r message=FALSE}
+# get analyticals obs
+source_sdg <- read_csv(here("pipeline/pipeline-data/source_sdg.csv"))
+
+source_sdg |> gt()
+
+```
+
+## sort out layout
+
+We want to lay out pic so that it imitates the UN SDG layout on the website.
+
+```{r}
+source_sdg |>
+  ggplot() +
+  geom_text(aes(
+    x = x, y = y, label = sdg_int
+  )) +
+  theme_minimal() +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank()
+  ) +
+  labs(
+    title = "UN SDG layout",
+    y = "",
+    x = ""
+  )
+
+
+```
+
+## size by proportion of respondents
+
+```{r}
+# grab analytical layer
+
+analytical_ranking_top_3 <- read_csv(here("pipeline/pipeline-data/analytical_ranking_top_3.csv")) 
 
 
 
 ```
+
+```{r}
+analytical_ranking_top_3 |>
+  select(respondent_id, sdg_id, ranking, region) |>
+  group_by(region) |>
+  mutate(
+    n_respondents = n_distinct(respondent_id)
+  ) |>
+  group_by(region, sdg_id) |>
+  summarise(
+    respondents = n_distinct(respondent_id),
+    total_respondents = mean(n_respondents)
+  ) |>
+  # shoot the laser
+  drop_na() |>
+  # really need to validate the aggrations but for now
+  # chookity, shoot the laser
+  left_join(source_sdg, by = "sdg_id") |>
+  arrange(sdg_int) |>
+  mutate(prop = respondents / total_respondents,
+  label_size = prop * 100) |>
+  ungroup() |>
+  ggplot() +
+    geom_text(aes(
+    x = x, y = y, label=sdg_int, colour = 1-prop#, size = label_size
+  ), size = 30) +
+  theme_minimal(base_size = 30) +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_blank()
+  ) +
+  labs(
+    title = "UN SDG layout",
+    y = "",
+    x = ""
+  )
+
+
+
+```
+
+
+
+## treemap of preference
+

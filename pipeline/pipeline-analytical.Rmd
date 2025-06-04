@@ -49,6 +49,7 @@ semantic_respondent
 
 analytical_ranking_top_3 <- 
   semantic_top_3 |>
+  # any columns you add to either sdg or respondent can carry through
     left_join(
       source_sdg, by = "sdg_id"
     ) |>
