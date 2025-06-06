@@ -33,13 +33,6 @@ ao_top_3 <- read_csv(here("pipeline/pipeline-data/analytical_ranking_top_3.csv")
 
 
 # pooking with a stick
-ao_top_3 |>
-  ggplot() +
-  geom_bar(
-    aes(x = sdg_label, stat="identity", fill=ranking)
-  ) +
-  coord_flip() +
-  facet_wrap(~region, scales = "free") +
-  theme_minimal()
+ao_top_3 
 
 ```
